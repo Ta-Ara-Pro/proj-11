@@ -10,7 +10,15 @@ import path from 'path'; // comes from node
 import { fileURLToPath } from 'url'
 import { register } from './controllers/auth.js';
 import  authRoutes  from './routers/auth.js'
-import userRoutes from './routers/user.js'
+import userRoutes from './routers/users.js'
+import postRoutes from './routers/posts.js'
+import { createPost } from './controllers/posts.js'
+import { verifyToken } from './middleware/auth.js';
+
+import User from './models/User.js';
+import Post from './models/Post.js';
+import { users,  posts } from './data/index.js'
+
 
 // CONFIGURATION =======
 // =========================
@@ -48,11 +56,13 @@ const upload = multer({ storage })
 // ROUTES WITH FILES  =========
 //=============================
 app.post('/auth/register', upload.single("picture"), register) 
+app.post('/posts', verifyToken, upload.single("picture"), createPost)
 
 // ROUTES   ===================
 //=============================
 app.use('/auth', authRoutes)
 app.use('/users', userRoutes)
+app.use('/posts', postRoutes)
 
 // MONGOOSE SETUP =========
 //=========================
@@ -65,6 +75,10 @@ mongoose
     .then(() => {
         console.log(' Mongodb is connected')
         app.listen(PORT, () => console.log(`Server is running at http://localhost:${PORT}`))
+
+        /* ADD DATA ONE TIME */
+        // User.insertMany(users);
+        // Post.insertMany(posts)
     })
     .catch((error) => console.log({ ' Mongodb connection error': error }))
 
