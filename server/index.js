@@ -10,6 +10,7 @@ import path from 'path'; // comes from node
 import { fileURLToPath } from 'url'
 import { register } from './controllers/auth.js';
 import  authRoutes  from './routers/auth.js'
+import userRoutes from './routers/user.js'
 
 // CONFIGURATION =======
 // =========================
@@ -51,6 +52,7 @@ app.post('/auth/register', upload.single("picture"), register)
 // ROUTES   ===================
 //=============================
 app.use('/auth', authRoutes)
+app.use('/users', userRoutes)
 
 // MONGOOSE SETUP =========
 //=========================
