@@ -24,7 +24,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 /* ==============================================  */
 /* there is no rootReducer which is created using combineReducers,
  because there is only one reducer called authReducer */
-persistConfig = { key: "root", storage, version: 1};
+const persistConfig = { key: "root", storage, version: 1};
 const persistedReducer = persistReducer(persistConfig, authReducer) /* if there was a rootReducer, it would be here instead of authReducer */
 const store = configureStore({
   reducer: persistedReducer,
