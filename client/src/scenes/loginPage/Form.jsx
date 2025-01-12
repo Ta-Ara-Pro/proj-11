@@ -33,6 +33,7 @@ const loginSchema = yup.object().shape({
   password: yup.string().required("required"),
 })
 
+ {/* fomik attribute */}
 const initialValuesRegister = {
   firstName: "",
   lastName: "",
@@ -101,6 +102,7 @@ const Form = () => {
   }
 
   {/*SUBMIT FUNCTION ===========================*/ }
+  //Formik automatically injects the `onSubmitProps` object into this function, along with the form's `values`
   const handleFormSubmit = async (values, onSubmitProps) => {
     if (isLogin) await login(values, onSubmitProps);
     if (isRegister) await register(values, onSubmitProps)
