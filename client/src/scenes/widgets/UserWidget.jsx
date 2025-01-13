@@ -27,16 +27,15 @@ import {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
-      console.log('data', data)
       setUser(data);
     };
   
     useEffect(() => {
       getUser();
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-    useEffect(() => {
-        console.log('Updated user state:', user);
-      }, [user]); // This runs whenever `user` updates
+    // useEffect(() => {
+    //     console.log('Updated user state:', user);
+    //   }, [user]); 
       
   
     if (!user) {
